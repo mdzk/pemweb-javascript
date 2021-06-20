@@ -1,4 +1,4 @@
-var dataMhs = [[]];
+var dataMhs = [[20753022, "Muhammad Dzaky", "Lampung", "dzaky@mail.com"]];
 
 function showMhs() {
     // var listMhs = document.getElementById("name");
@@ -15,7 +15,7 @@ function showMhs() {
     for (let i = 0; i < dataMhs.length; i++) {
         var clone = template.content.cloneNode(true);
         var td = clone.querySelectorAll("td");
-        clone.querySelectorAll("tr[data-id]")[0].setAttribute("data-id", i);
+        clone.querySelectorAll("button[data-id]")[0].setAttribute("data-id", i);
         td[0].textContent = dataMhs[i][0];
         td[1].textContent = dataMhs[i][1];
         td[2].textContent = dataMhs[i][2];

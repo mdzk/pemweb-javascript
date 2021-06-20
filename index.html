@@ -38,14 +38,14 @@
     </table>
 
     <template id="template">
-        <tr data-id="">
+        <tr>
             <td class="data-npm"></td>
             <td class="data-nama"></td>
             <td class="data-alamat"></td>
             <td class="data-email"></td>
             <td>
-                <button class="del btn btn-sm btn-danger" onclick="hapus(this)" id="hapus">Delete</button>
-                <button class="edit btn btn-sm btn-primary" onclick="edit(this)">Edit</button>
+                <button onclick="hapus(this)" data-id="">Delete</button>
+                <button onclick="edit(this)">Edit</button>
             </td>
         </tr>
     </template>

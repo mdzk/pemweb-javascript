@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Dzaky</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"> 
+    <style>
+        body {box-sizing: border-box; font-family: 'Nunito', serif, arial;padding: 0;margin: 0;}
+    </style>
+</head>
+<body>
+    
+    <h1 align="center">Data Mahasiswa</h1>
+    <form onsubmit="event.preventDefault();">
+        <input type="text" placeholder="npm" name="npm" autocomplete="off">
+        <input type="text" placeholder="nama" name="nama" autocomplete="off">
+        <input type="address" placeholder="alamat" name="alamat" autocomplete="off">
+        <input type="text" placeholder="email" name="email" autocomplete="off">
+        <button type="submit" onclick="addMhs()" >Submit</button>
+    </form>
+
+    <table id="table" align="center" width="80%" border="1" cellspacing="0" cellpadding="6">
+        <thead>
+            <tr>
+                <th>NPM</th>
+                <th>Nama</th>
+                <th>Alamat</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-id="">
+                <td class="data-npm">dummy npm</td>
+                <td class="data-nama">dummy nama</td>
+                <td class="data-alamat">dummy alamat</td>
+                <td class="data-email">email</td>
+                <td>
+                    <button class="del btn btn-sm btn-danger" onclick="hapus(this)" id="hapus">Delete</button>
+                    <button class="edit btn btn-sm btn-primary" onclick="edit(this)">Edit</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <template id="template">
+        <tr data-id="">
+            <td class="data-npm"></td>
+            <td class="data-nama"></td>
+            <td class="data-alamat"></td>
+            <td class="data-email"></td>
+            <td>
+                <button class="del btn btn-sm btn-danger" onclick="hapus(this)" id="hapus">Delete</button>
+                <button class="edit btn btn-sm btn-primary" onclick="edit(this)">Edit</button>
+            </td>
+        </tr>
+    </template>
+
+    <script src="fungsi.js"></script>
+</body>
+</html>

@@ -1,14 +1,26 @@
-var dataMhs = [
-    [20753022, "Muhammad Dzaky", "Lampung", "dzaky@mail.com"],
-];
+var dataMhs = [[]];
 
 function showMhs() {
-    var listMhs = document.getElementById("name");
-    listMhs.innerHTML = "";
-    for (let i = 0; i < dataMhs.length; i++){
-        var btnEdit = "<a href='#' onclick='edit("+i+")'>Edit</a>";
-        var btnHapus = "<a href='#' onclick='deleteMhs("+i+")'>Hapus</a>";
-        listMhs.innerHTML += "<li>" + dataMhs[i][0] + "[" + btnEdit + "|" + btnHapus + "] </li>";
+    // var listMhs = document.getElementById("name");
+    // listMhs.innerHTML = "";
+    // for (let i = 0; i < dataMhs.length; i++){
+    //     var btnEdit = "<a href='#' onclick='edit("+i+")'>Edit</a>";
+    //     var btnHapus = "<a href='#' onclick='deleteMhs("+i+")'>Hapus</a>";
+    //     listMhs.innerHTML += "<li>" + dataMhs[i][0] + "[" + btnEdit + "|" + btnHapus + "] </li>";
+    // }
+
+
+    var tbody = document.querySelector("tbody");
+    var template = document.querySelector('#template');
+    for (let i = 0; i < dataMhs.length; i++) {
+        var clone = template.content.cloneNode(true);
+        var td = clone.querySelectorAll("td");
+        clone.querySelectorAll("tr[data-id]")[0].setAttribute("data-id", i);
+        td[0].textContent = dataMhs[i][0];
+        td[1].textContent = dataMhs[i][1];
+        td[2].textContent = dataMhs[i][2];
+        td[3].textContent = dataMhs[i][3];
+        tbody.appendChild(clone);
     }
 }
 
@@ -27,25 +39,8 @@ function edit(id) {
     showMhs();
 }
 
-function deleteMhs(id) {
+function hapus(id) {
     dataMhs.splice(id, 1);
+    document.querySelector("tbody").querySelectorAll("tr").style.display = 'none';
     showMhs();
 }
-
-// showMhs();
-
-var tbody = document.querySelector("tbody");
-var template = document.querySelector('#template');
-
-var clone = template.content.cloneNode(true);
-var td = clone.querySelectorAll("td");
-td[0].textContent = "1235646565";
-td[1].textContent = "Stuff";
-tbody.appendChild(clone);
-
-var clone2 = template.content.cloneNode(true);
-td = clone2.querySelectorAll("td");
-td[0].textContent = "0384928528";
-td[1].textContent = "Acme Kidney Beans 2";
-
-tbody.appendChild(clone2);

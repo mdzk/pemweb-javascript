@@ -46,6 +46,7 @@ function addMhs() {
         document.querySelectorAll("form[data-id]")[0].setAttribute("data-id", "");
 
         kosong();
+        alert("data berhasil diedit");
     } else {
         var npm = document.querySelector("input[name=npm]").value == "";
         var nama = document.querySelector("input[name=nama]").value == "";
@@ -72,6 +73,7 @@ function addMhs() {
             tbody.appendChild(clone);
 
             kosong();
+            alert("data berhasil ditambahkan");
         }
     }
 
@@ -94,11 +96,15 @@ function edit(e) {
 }
 
 function hapus(e) {
-    var tr = e.firstChild.parentElement.parentElement.parentElement;
-    var id = tr.getAttribute("data-id");
-    dataMhs.splice(id, 1);
-    tr.remove();
-    for(let z = 0; z < dataMhs.length; z++) {
-        document.querySelectorAll("tr[data-id]")[z].setAttribute("data-id", z);
+    if(confirm("yakin ingin hapus data ini?")) {
+        var tr = e.firstChild.parentElement.parentElement.parentElement;
+        var id = tr.getAttribute("data-id");
+        dataMhs.splice(id, 1);
+        tr.remove();
+        for(let z = 0; z < dataMhs.length; z++) {
+            document.querySelectorAll("tr[data-id]")[z].setAttribute("data-id", z);
+        }
+        document.querySelectorAll("form[data-id]")[0].setAttribute("data-id", "");
+        kosong();
     }
 }

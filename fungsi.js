@@ -1,46 +1,75 @@
 var dataMhs = [[20753022, "Muhammad Dzaky", "Lampung", "dzaky@mail.com"]];
 
-function showMhs() {
-    // var listMhs = document.getElementById("name");
-    // listMhs.innerHTML = "";
-    // for (let i = 0; i < dataMhs.length; i++){
-    //     var btnEdit = "<a href='#' onclick='edit("+i+")'>Edit</a>";
-    //     var btnHapus = "<a href='#' onclick='deleteMhs("+i+")'>Hapus</a>";
-    //     listMhs.innerHTML += "<li>" + dataMhs[i][0] + "[" + btnEdit + "|" + btnHapus + "] </li>";
-    // }
-
-
-    var tbody = document.querySelector("tbody");
-    var template = document.querySelector('#template');
-    for (let i = 0; i < dataMhs.length; i++) {
-        var clone = template.content.cloneNode(true);
-        var td = clone.querySelectorAll("td");
-        clone.querySelectorAll("button[data-id]")[0].setAttribute("data-id", i);
-        td[0].textContent = dataMhs[i][0];
-        td[1].textContent = dataMhs[i][1];
-        td[2].textContent = dataMhs[i][2];
-        td[3].textContent = dataMhs[i][3];
-        tbody.appendChild(clone);
-    }
+var tbody = document.querySelector("tbody");
+var template = document.querySelector('#template');
+for (let i = 0; i < dataMhs.length; i++) {
+    var clone = template.content.cloneNode(true);
+    var td = clone.querySelectorAll("td");
+    clone.querySelectorAll("tr[data-id]")[0].setAttribute("data-id", i);
+    td[0].textContent = dataMhs[i][0];
+    td[1].textContent = dataMhs[i][1];
+    td[2].textContent = dataMhs[i][2];
+    td[3].textContent = dataMhs[i][3];
+    tbody.appendChild(clone);
 }
 
 function addMhs() {
-    var npm = document.querySelector("input[name=npm]").value;
-    var nama = document.querySelector("input[name=nama]").value;
-    var alamat = document.querySelector("input[name=alamat]").value;
-    var email = document.querySelector("input[name=email]").value;
-    dataMhs.push([npm, nama, alamat, email]);
-    showMhs();
+
+    var id = document.querySelectorAll("form[data-id]")[0].getAttribute("data-id");
+
+    if(id !== "") {
+        var npm = document.querySelector("input[name=npm]").value;
+        var nama = document.querySelector("input[name=nama]").value;
+        var alamat = document.querySelector("input[name=alamat]").value;
+        var email = document.querySelector("input[name=email]").value;
+
+        dataMhs[id][0] = npm;
+        dataMhs[id][1] = nama;
+        dataMhs[id][2] = alamat;
+        dataMhs[id][3] = email;
+
+        document.querySelector("tr[data-id=id]").querySelector(".data-npm").innerText = npm;
+        document.querySelectorAll("form[data-id]")[0].setAttribute("data-id", "");
+    } else {
+        var npm = document.querySelector("input[name=npm]").value;
+        var nama = document.querySelector("input[name=nama]").value;
+        var alamat = document.querySelector("input[name=alamat]").value;
+        var email = document.querySelector("input[name=email]").value;
+        dataMhs.push([npm, nama, alamat, email]);
+    
+        var tbody = document.querySelector("tbody");
+        var template = document.querySelector('#template');
+        var clone = template.content.cloneNode(true);
+        var td = clone.querySelectorAll("td");
+        clone.querySelectorAll("tr[data-id]")[0].setAttribute("data-id", dataMhs.length-1);
+        td[0].textContent = npm;
+        td[1].textContent = nama;
+        td[2].textContent = alamat;
+        td[3].textContent = email;
+        tbody.appendChild(clone);
+    }
+
 }
 
-function edit(id) {
-    var newMhs = prompt("nama mhs", dataMhs[id]);
-    dataMhs[id] = newMhs;
-    showMhs();
+function edit(e) {
+    var tr = e.firstChild.parentElement.parentElement.parentElement;
+    var id = tr.getAttribute("data-id");
+
+    var npm = document.querySelector("input[name=npm]").value = dataMhs[id][0];
+    var nama = document.querySelector("input[name=nama]").value = dataMhs[id][1];
+    var alamat = document.querySelector("input[name=alamat]").value = dataMhs[id][2];
+    var email = document.querySelector("input[name=email]").value = dataMhs[id][3];
+    document.querySelectorAll("form[data-id]")[0].setAttribute("data-id", id);
+
+    dataMhs[id][0] = npm;
+    dataMhs[id][1] = nama;
+    dataMhs[id][2] = alamat;
+    dataMhs[id][3] = email;
 }
 
-function hapus(id) {
+function hapus(e) {
+    var tr = e.firstChild.parentElement.parentElement.parentElement;
+    var id = tr.getAttribute("data-id");
     dataMhs.splice(id, 1);
-    document.querySelector("tbody").querySelectorAll("tr").style.display = 'none';
-    showMhs();
+    tr.style.display = "none";
 }

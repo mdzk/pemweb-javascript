@@ -14,7 +14,7 @@
 <body>
     
     <h1 align="center">Data Mahasiswa</h1>
-    <form onsubmit="event.preventDefault();">
+    <form onsubmit="event.preventDefault();" data-id="">
         <input type="text" placeholder="npm" name="npm" autocomplete="off">
         <input type="text" placeholder="nama" name="nama" autocomplete="off">
         <input type="address" placeholder="alamat" name="alamat" autocomplete="off">
@@ -38,13 +38,13 @@
     </table>
 
     <template id="template">
-        <tr>
+        <tr data-id="">
             <td class="data-npm"></td>
             <td class="data-nama"></td>
             <td class="data-alamat"></td>
             <td class="data-email"></td>
             <td>
-                <button onclick="hapus(this)" data-id="">Delete</button>
+                <button onclick="hapus(this)" >Delete</button>
                 <button onclick="edit(this)">Edit</button>
             </td>
         </tr>

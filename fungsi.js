@@ -1,4 +1,8 @@
-var dataMhs = [[20753022, "Muhammad Dzaky", "Lampung", "dzaky@mail.com"]];
+var dataMhs = [
+    [20753022, "Muhammad Dzaky", "Lampung", "dzaky@mail.com"],
+    [20753030, "Rival Ramli Mursat", "Padang", "rival@mail.com"],
+    [20753013, "Haikal Hifzon", "Lampung", "haikal@mail.com"]
+];
 
 var tbody = document.querySelector("tbody");
 var template = document.querySelector('#template');
@@ -93,5 +97,8 @@ function hapus(e) {
     var tr = e.firstChild.parentElement.parentElement.parentElement;
     var id = tr.getAttribute("data-id");
     dataMhs.splice(id, 1);
-    tr.style.display = "none";
+    tr.remove();
+    for(let z = 0; z < dataMhs.length; z++) {
+        document.querySelectorAll("tr[data-id]")[z].setAttribute("data-id", z);
+    }
 }
